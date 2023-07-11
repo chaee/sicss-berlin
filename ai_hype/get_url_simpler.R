@@ -9,7 +9,7 @@ query_list <-
     `api-key` = Sys.getenv("nyt_key"), 
     begin_date = "20220601",
     end_date="20230610",
-    fq="Artificial Intelligence"
+    fq='\"Artificial Intelligence\"'
   )
 
 r <- GET(nyt_articlesearch_url, query = query_list)
@@ -17,7 +17,7 @@ hits <- content(r)$response$meta$hits
 # pages <- 0:(ceiling(hits/10) - 1)
 max <- ceiling(hits/10)
 
-file <- file("nyt_siimple_urls.txt")
+file <- file("nyt_quoted_urls.txt")
 urls <- character()
 for(page_idx in seq(0, max)){
   
