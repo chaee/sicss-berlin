@@ -8,7 +8,7 @@ articles <- data.frame()
 count <- 1
 backup_articles <- articles
 
-for(url in urls[1:10]){
+for(url in urls[1:50]){
     
     Sys.sleep(12)
     
@@ -59,7 +59,7 @@ for(url in urls[1:10]){
 
 scraped <- readRDS(file="/Users/yunchaewon/sicss-berlin/ai_hype/NYT_ai_articles_100.Rds", refhook = NULL)
 
-#scraped_2 <- readRDS(file="/Users/yunchaewon/sicss-berlin/ai_hype/NYT_ai_articles_1_10.Rds", refhook = NULL)
+#uscraped_2 <- readRDS(file="/Users/yunchaewon/sicss-berlin/ai_hype/NYT_ai_articles_1_10.Rds", refhook = NULL)
 
 
 html <- read_html("https://edition.cnn.com/2023/05/10/us/florida-social-studies-textbooks-education-department/index.html")
