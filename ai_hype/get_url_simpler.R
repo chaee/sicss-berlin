@@ -14,15 +14,28 @@ query_list <-
 
 r <- GET(nyt_articlesearch_url, query = query_list)
 hits <- content(r)$response$meta$hits
-hits
-pages <- 0:(ceiling(hits/10) - 1)
+# pages <- 0:(ceiling(hits/10) - 1)
+max <- ceiling(hits/10)
 
+file <- file("nyt_siimple_urls.txt")
+urls <- character()
+for(page_idx in seq(0, max)){
+  
+  new_query_list <- c(query_list, page = page_idx)
+  Sys.sleep(12)
+  r<- GET(nyt_articlesearch_url, query = new_query_list)
+  
+  print(status_code(r))
+  print(page_idx)
+  
+  res <- content(r)
+  for (list_pos in 1:10) {
+    res_url <- res$response$docs[[list_pos]]$web_url
+    print(res_url)
+    urls <- c(urls, unlist(res_url))
+  }  
+  writeLines(urls, file)
+}
 
-file <- file("simple_urls.txt")
-urls <- list()
-res <- content(r)
-res_url <- lapply(1:10, function(i){
-  res_url <- res$response$docs[[i]]$web_url
-  return(res_url)
-  }
-)
+close(file)
+
